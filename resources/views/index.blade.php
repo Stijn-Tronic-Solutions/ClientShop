@@ -133,14 +133,14 @@
                       <div class="extras-for-product">
                         <div class="text-block">Extraatje toevoegen?</div>
                         @foreach ( $extras_identifier[$product->{'id'}] as $extra )
-                        <label class="w-checkbox extra">
-                          <div class="w-checkbox-input w-checkbox-input--inputType-custom extra-checkbox"></div>
+                        <button selected="false" onclick="selectExtra({{ $product->{'id'} }}, {{ $extra[2] }})" id="{{ $product->{'id'} }}{{ $extra[2] }}" style="display: block; padding-left: 0px !important; background-color: rgba(0, 0, 0, 0)" type="button">
+                          <div></div>
                           <input type="checkbox" id="{{ $loop->iteration }} " name="extra-11" data-name="Extra 11" style="opacity:0;position:absolute;z-index:-1">
-                          <span class="w-form-label" for="extra-11">{{ $extra[0] }}
+                          <span id="{{ $product->{'id'} }}{{ $extra[2] }}label" class="w-form-label" for="extra-11">{{ $extra[0] }}
                             <strong class="extra-price">- €{{ $extra[1] }}
                             </strong>
                           </span>
-                        </label>
+                        </button>
                         @endforeach
                       </div>
                     </div>

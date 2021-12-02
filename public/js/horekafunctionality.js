@@ -1,4 +1,4 @@
-function incrementProduct(id, upDown){
+function incrementProduct(id,upDown){
   $amountInput = document.getElementById(id+'amount');
   if (upDown == "+") $amountInput.value = parseInt($amountInput.value) + 1;
   else if (upDown == "-") {
@@ -8,6 +8,25 @@ function incrementProduct(id, upDown){
   return;
 }
 
+function selectExtra(id,extraID){
+  $extraSelect = document.getElementById(String(id)+String(extraID));
+  $label = document.getElementById(String(id)+String(extraID)+"label");
+  $selected = $extraSelect.getAttribute("selected");
+  if($selected != "true") {
+
+    $label.style.fontWeight = "bold";
+    $extraSelect.setAttribute("selected", "true");
+
+  }
+
+  else{
+    $extraSelect.setAttribute("selected", "false");
+    $label.style.fontWeight = "normal";
+  }
+
+
+}
+
 
 function addToCart(id){
 
@@ -15,7 +34,7 @@ function addToCart(id){
 //  addToCartUI(productName, "none", productPrice);
 }
 
-function addToCartUI(productName, productExtras, productPrice){
+function addToCartUI(productName,productExtras,productPrice){
   document.getElementById('cart_products').innerHTML += '<div class="order-item">  <div class="w-clearfix">  <div class="item-name">' + productName +  '</div>  <div class="item-price">€' + productPrice + '</div>  </div>  <div class="subinfo-for-order w-clearfix">  <div class="item-subinfo">' + productExtras + '</div>  <a href="#" class="remove-product">Verwijderen</a>  </div>  </div>';
 }
 
