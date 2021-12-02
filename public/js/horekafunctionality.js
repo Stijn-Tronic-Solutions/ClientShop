@@ -1,12 +1,11 @@
 function incrementProduct(id, upDown){
   $amountInput = document.getElementById(id+'amount');
-  if (upDown == "+"){
-    $amountInput.value = parseInt($amountInput.value) + 1;
-  }
+  if (upDown == "+") $amountInput.value = parseInt($amountInput.value) + 1;
   else if (upDown == "-") {
-    $amountInput.value = parseInt($amountInput.value) - 1;
+    if ($amountInput.value > 1) $amountInput.value = parseInt($amountInput.value) - 1;
   }
   // Else just don't do a thing
+  return;
 }
 
 
