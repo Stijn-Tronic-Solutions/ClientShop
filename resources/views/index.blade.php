@@ -144,10 +144,10 @@
                         @endforeach
                       </div>
                     </div>
-                    <div class="add-to-cart w-clearfix"><input type="number" class="select-amount w-input" maxlength="256" name="Amount" data-name="Amount" placeholder="Aantal" id="Amount-3" required="">
+                    <div class="add-to-cart w-clearfix"><input type="number" class="select-amount w-input" maxlength="256" name="Amount" data-name="Amount" value="1" placeholder="Aantal" id="{{ $product->{'id'} }}amount" required="">
                       <div class="add-amount">
-                        <a href="#" class="amount-button">+</a>
-                        <a href="#" class="amount-button">-</a>
+                        <button onclick="incrementProduct({{ $product->{'id'} }},'+');" style="background-color: rgba(0, 0, 0, 0)" href="#" class="amount-button">+</button>
+                        <button onclick="incrementProduct({{ $product->{'id'} }},'-');" style="background-color: rgba(0, 0, 0, 0)" href="#" class="amount-button">-</button>
                       </div><input id="submit" type="submit" value="+ Toevoegen Aan Bestelling" data-wait="Bezig.." class="important-button add-to-cart w-button">
                     </div>
                   </form>

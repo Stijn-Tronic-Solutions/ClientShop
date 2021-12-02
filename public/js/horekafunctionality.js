@@ -1,3 +1,27 @@
+function incrementProduct(id, upDown){
+  $amountInput = document.getElementById(id+'amount');
+  if (upDown == "+"){
+    $amountInput.value = parseInt($amountInput.value) + 1;
+  }
+  else if (upDown == "-") {
+    $amountInput.value = parseInt($amountInput.value) - 1;
+  }
+  // Else just don't do a thing
+}
+
+
+function addToCart(id){
+
+//  document.getElementById(id)
+//  addToCartUI(productName, "none", productPrice);
+}
+
+function addToCartUI(productName, productExtras, productPrice){
+  document.getElementById('cart_products').innerHTML += '<div class="order-item">  <div class="w-clearfix">  <div class="item-name">' + productName +  '</div>  <div class="item-price">€' + productPrice + '</div>  </div>  <div class="subinfo-for-order w-clearfix">  <div class="item-subinfo">' + productExtras + '</div>  <a href="#" class="remove-product">Verwijderen</a>  </div>  </div>';
+}
+
+
+
 /*  $(document).ready(function() {
 
         window.cart = <?php echo json_encode($cart) ?>;
@@ -37,12 +61,3 @@
 
     }
 */
-    function addToCart(id){
-
-
-      addToCartUI(productName, "none", productPrice);
-    }
-
-    function addToCartUI(productName, productExtras, productPrice){
-      document.getElementById('cart_products').innerHTML += '<div class="order-item">  <div class="w-clearfix">  <div class="item-name">' + productName +  '</div>  <div class="item-price">€' + productPrice + '</div>  </div>  <div class="subinfo-for-order w-clearfix">  <div class="item-subinfo">' + productExtras + '</div>  <a href="#" class="remove-product">Verwijderen</a>  </div>  </div>';
-    }
