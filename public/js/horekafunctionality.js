@@ -30,6 +30,7 @@ function selectExtra(id,extraID){
 // just declaring the base values else NaN
 window.subPrice = 0;
 window.totalPrice = 0;
+window.uniqueProducts = 0;
 
 
 function addToCart(id, extraIds){
@@ -40,12 +41,14 @@ function addToCart(id, extraIds){
   $productExtras = "";
 
   $first = true;
+  $productID = id;
   extraIds.forEach( extra => {
     // validating if extra is actually $selected
     if(document.getElementById(id+extra).getAttribute('selected') == "true"){
       if($first != true) $productExtras = $productExtras + ", "; else $first = false;
       $productExtras = $productExtras + document.getElementById(extra + 'xtrinfo').getAttribute('name');
       $productPrice = parseFloat($productPrice) + parseFloat(document.getElementById(extra + 'xtrinfo').getAttribute('price'));
+      $productID = $productID + extra;
   }
 });
   // applying multiplier
@@ -55,16 +58,28 @@ function addToCart(id, extraIds){
   window.subPrice = parseFloat(window.subPrice) + parseFloat($productPrice);
   window.totalPrice = parseFloat(window.totalPrice) + 2.00 + parseFloat($productPrice);
 
+
   // adding to UI
-  addToCartUI($productName, $productExtras, $productPrice);
+  if (document.getElementById('cart' + $productID)){ // product not unique - need to change current
+    $uniqueProductName = document.getElementById('cart' + $productID + 'name').innerHTML;
+    $uniqueProductPrice = document.getElementById('cart' + $productID + 'price').innerHTML;
+    document.getElementById('cart' + $productID + 'name').innerHTML = (parseInt($amount) + parseInt($uniqueProductName.substring(0,$uniqueProductName.indexOf('x')))) + "x " + document.getElementById(id + 'name').innerHTML;
+    document.getElementById('cart' + $productID + 'price').innerHTML = "€" + (parseFloat($productPrice) + parseFloat($uniqueProductPrice.substring(1, $uniqueProductPrice.length))).toFixed(2);
+  }
+  else addToCartUI($productName, $productExtras, $productPrice, $productID); // product is unique
+
   document.getElementById('sub-price').innerHTML = "€" + window.subPrice.toFixed(2);
   document.getElementById('total-price').innerHTML = "€" + window.totalPrice.toFixed(2);
 }
 
-function addToCartUI(productName,productExtras,productPrice){
-  document.getElementById('cart_products').innerHTML += '<div class="order-item">  <div class="w-clearfix">  <div class="item-name">' + productName +  '</div>  <div class="item-price">€' + productPrice + '</div>  </div>  <div class="subinfo-for-order w-clearfix">  <div class="item-subinfo">' + productExtras + '</div>  <a href="#" class="remove-product">Verwijderen</a>  </div>  </div>';
+function addToCartUI(productName,productExtras,productPrice, productID){
+  document.getElementById('cart_products').innerHTML += '<div id="cart' + productID + '" class="order-item">  <div class="w-clearfix">  <div id="cart' + productID +'name" class="item-name">' + productName +  '</div>  <div id="cart' + $productID +'price"class="item-price">€' + productPrice + '</div>  </div>  <div class="subinfo-for-order w-clearfix">  <div class="item-subinfo">' + productExtras + '</div>  <button style="background-color: rgb(0,0,0,0);" onclick="removeFromCart(' + productID + ')" class=" remove-product">Verwijderen</button>  </div>  </div>';
 }
 
+function removeFromCart(productID){
+  document.getElementById('cart' + productID).remove();
+
+}
 
 /*  $(document).ready(function() {
 
