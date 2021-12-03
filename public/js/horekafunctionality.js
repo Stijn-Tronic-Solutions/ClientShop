@@ -28,10 +28,19 @@ function selectExtra(id,extraID){
 }
 
 
-function addToCart(id){
-
-//  document.getElementById(id)
-//  addToCartUI(productName, "none", productPrice);
+function addToCart(id, extraIds){
+  $productName = document.getElementById(id + 'name').innerHTML;
+  $productPrice = document.getElementById(id + 'price').getAttribute('price');
+  $productExtras = "";
+  $first = true;
+  extraIds.forEach( extra => {
+    if($first != true) $productExtras = $productExtras + ", "; else $first = false;
+    $productExtras = $productExtras + document.getElementById(extra + 'xtrinfo').getAttribute('name');
+    $productPrice = parseFloat($productPrice) + parseFloat(document.getElementById(extra + 'xtrinfo').getAttribute('price'));
+});
+  $productPrice = $productPrice.toFixed(2);
+  //  document.getElementById(id)\
+  addToCartUI($productName, $productExtras, $productPrice);
 }
 
 function addToCartUI(productName,productExtras,productPrice){

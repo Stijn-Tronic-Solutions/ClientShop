@@ -126,19 +126,19 @@
                     <div class="product-pop-up-holder">
                       <div class="main-product">
                         <div class="large-product-image-holder"><img src="{{ $product_base_uri }}{{ $product->{'image'} }}" loading="lazy" sizes="100vw" alt="" class="larger-product-image"></div>
-                        <h3 class="product-name">{{ $product->{'product_name'} }}</h3>
-                        <div class="product-price">€{{ $product->{'price'} }}</div>
+                        <h3 class="product-name" id="{{ $product->{'id'} }}name">{{ $product->{'product_name'} }}</h3>
+                        <div class="product-price" price="{{ $product->{'price'} }}" id="{{ $product->{'id'} }}price">€{{ $product->{'price'} }}</div>
                         <p class="product-description">{{ $product->{'details'} }}</p>
                       </div>
                       <div class="extras-for-product">
                         <div class="text-block">Extraatje toevoegen?</div>
                         @foreach ( $extras_identifier[$product->{'id'}] as $extra )
                         <button selected="false" onclick="selectExtra({{ $product->{'id'} }}, {{ $extra[2] }})" id="{{ $product->{'id'} }}{{ $extra[2] }}" style="display: block; padding-left: 0px !important; background-color: rgba(0, 0, 0, 0)" type="button">
-                          <div></div>
-                          <input type="checkbox" id="{{ $loop->iteration }} " name="extra-11" data-name="Extra 11" style="opacity:0;position:absolute;z-index:-1">
-                          <span id="{{ $product->{'id'} }}{{ $extra[2] }}label" class="w-form-label" for="extra-11">{{ $extra[0] }}
+                          <span id="{{ $product->{'id'} }}{{ $extra[2] }}label" class="w-form-label" for="extra-11"> {{ $extra[0] }}
                             <strong class="extra-price">- €{{ $extra[1] }}
                             </strong>
+                            <label id="{{ $extra[2] }}xtrname">
+                            <div id="{{ $extra[2] }}xtrinfo" price="{{ $extra[1] }}" name="{{ $extra[0] }}" style="display:none;">
                           </span>
                         </button>
                         @endforeach
@@ -148,7 +148,7 @@
                       <div class="add-amount">
                         <button type="button" onclick="incrementProduct({{ $product->{'id'} }},'+');" style="background-color: rgba(0, 0, 0, 0)" href="#" class="amount-button">+</button>
                         <button type="button" onclick="incrementProduct({{ $product->{'id'} }},'-');" style="background-color: rgba(0, 0, 0, 0)" href="#" class="amount-button">-</button>
-                      </div><input id="submit" type="submit" value="+ Toevoegen Aan Bestelling" data-wait="Bezig.." class="important-button add-to-cart w-button">
+                      </div><input id="submit" onclick="addToCart({{ $product->{'id'} }}, [@foreach($extras_identifier[$product->{'id'}] as $extra) '{{ $extra[2] }}'@if(!$loop->last),@endif @endforeach])" )" type="button" value="+ Toevoegen Aan Bestelling" data-wait="Bezig.." class="important-button add-to-cart w-button">
                     </div>
                   </form>
                   <div class="w-form-done">
