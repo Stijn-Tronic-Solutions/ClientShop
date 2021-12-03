@@ -27,26 +27,43 @@ function selectExtra(id,extraID){
 
 }
 
+// just declaring the base values else NaN
+window.subPrice = 0;
+window.totalPrice = 0;
+
 
 function addToCart(id, extraIds){
-  $productName = document.getElementById(id + 'name').innerHTML;
+  // just some basic value identification
+  $amount = document.getElementById(id+'amount').value;
+  $productName = $amount + "x " + document.getElementById(id + 'name').innerHTML;
   $productPrice = document.getElementById(id + 'price').getAttribute('price');
   $productExtras = "";
+
   $first = true;
   extraIds.forEach( extra => {
-    if($first != true) $productExtras = $productExtras + ", "; else $first = false;
-    $productExtras = $productExtras + document.getElementById(extra + 'xtrinfo').getAttribute('name');
-    $productPrice = parseFloat($productPrice) + parseFloat(document.getElementById(extra + 'xtrinfo').getAttribute('price'));
+    // validating if extra is actually $selected
+    if(document.getElementById(id+extra).getAttribute('selected') == "true"){
+      if($first != true) $productExtras = $productExtras + ", "; else $first = false;
+      $productExtras = $productExtras + document.getElementById(extra + 'xtrinfo').getAttribute('name');
+      $productPrice = parseFloat($productPrice) + parseFloat(document.getElementById(extra + 'xtrinfo').getAttribute('price'));
+  }
 });
-  $productPrice = $productPrice.toFixed(2);
-  //  document.getElementById(id)\
+  // applying multiplier
+  $productPrice = ($productPrice * $amount).toFixed(2);
+
+  // calculating main prices
+  window.subPrice = parseFloat(window.subPrice) + parseFloat($productPrice);
+  window.totalPrice = parseFloat(window.totalPrice) + 2.00 + parseFloat($productPrice);
+
+  // adding to UI
   addToCartUI($productName, $productExtras, $productPrice);
+  document.getElementById('sub-price').innerHTML = "€" + window.subPrice.toFixed(2);
+  document.getElementById('total-price').innerHTML = "€" + window.totalPrice.toFixed(2);
 }
 
 function addToCartUI(productName,productExtras,productPrice){
   document.getElementById('cart_products').innerHTML += '<div class="order-item">  <div class="w-clearfix">  <div class="item-name">' + productName +  '</div>  <div class="item-price">€' + productPrice + '</div>  </div>  <div class="subinfo-for-order w-clearfix">  <div class="item-subinfo">' + productExtras + '</div>  <a href="#" class="remove-product">Verwijderen</a>  </div>  </div>';
 }
-
 
 
 /*  $(document).ready(function() {

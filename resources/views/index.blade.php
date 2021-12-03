@@ -86,7 +86,7 @@
             <div class="order-item total">
               <div class="subinfo-for-order w-clearfix">
                 <div class="item-subinfo">Subtotaal</div>
-                <a href="#" class="remove-product">€33.00</a>
+                <a href="#" class="remove-product" id="sub-price">---</a>
               </div>
               <div class="subinfo-for-order w-clearfix">
                 <div class="item-subinfo">Bezorgkosten</div>
@@ -94,7 +94,7 @@
               </div>
               <div class="total w-clearfix">
                 <div class="item-name">Totaal</div>
-                <div class="item-price">€35.00</div>
+                <div id="total-price" class="item-price">---</div>
               </div>
             </div>
           </div>
