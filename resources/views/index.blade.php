@@ -13,6 +13,7 @@
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <style>
   ::-webkit-scrollbar {
     width: 10px;
@@ -81,12 +82,28 @@
           <div class="order-information">
             <h3>Jouw bestelling</h3>
             <div id="cart_products" class="products-scroller main-shop">
+              @if ($cart != null) @foreach ($cart->uniqueProducts as $key => $cartProduct)
+              <div class="order-item">
+                <div class="w-clearfix">
+                  <div class="item-name">{{ $cartProduct['amount'] }} x {{ $cartProduct['name'] }}</div>
+                  <div class="item-price">€ {{ number_format($cartProduct['price'], 2) }}</div>
+                </div>
+                <div class="subinfo-for-order w-clearfix">
+                  <div class="item-subinfo"> {{ $cartProduct['extras'] }} </div>
+                  <form method="POST" action="verwijderen">
+                    @csrf
+                    <input type="hidden" name="uniqueId" value="{{ $key }}">
+                    <button type="submit" style="background-color: rgb(0,0,0,0);" class="remove-product">Verwijderen</button>
+                  </form>
+              </div>
+              </div>
+              @endforeach @endif
             </div>
             <a data-w-id="a9759669-7f43-2017-4e98-5fa1b5f324d8" href="#" class="close-order-block">x</a>
             <div class="order-item total">
               <div class="subinfo-for-order w-clearfix">
                 <div class="item-subinfo">Subtotaal</div>
-                <a href="#" class="remove-product" id="sub-price">---</a>
+                <a href="#" class="remove-product" id="sub-price">@if ($cart != null) @if ($cart->subPrice > 0) € {{ number_format($cart->subPrice, 2) }} @else --- @endif @else --- @endif </a>
               </div>
               <div class="subinfo-for-order w-clearfix">
                 <div class="item-subinfo">Bezorgkosten</div>
@@ -94,7 +111,7 @@
               </div>
               <div class="total w-clearfix">
                 <div class="item-name">Totaal</div>
-                <div id="total-price" class="item-price">---</div>
+                <div id="total-price" class="item-price">@if ($cart != null) @if ($cart->totalPrice > 2) € {{ number_format($cart->totalPrice, 2) }} @else --- @endif @else --- @endif </div>
               </div>
             </div>
           </div>
@@ -122,7 +139,7 @@
               <div style="opacity:0;display:none" class="product-pop-up">
                 <div class="form-block">
                   <a data-w-id="0efb55b5-d834-de69-a30a-7545ff493741" href="#" class="close">x</a>
-                  <form id="{{ $product->{'id'} }}" onsubmit="addToCart({{ $product->{'id'} }})">
+                  <form id="{{ $product->{'id'} }}" onsubmit="addToCart({{ $product->{'id'} }})" method="POST" action="toevoegen">
                     <div class="product-pop-up-holder">
                       <div class="main-product">
                         <div class="large-product-image-holder"><img src="{{ $product_base_uri }}{{ $product->{'image'} }}" loading="lazy" sizes="100vw" alt="" class="larger-product-image"></div>
@@ -137,7 +154,6 @@
                           <span id="{{ $product->{'id'} }}{{ $extra[2] }}label" class="w-form-label" for="extra-11"> {{ $extra[0] }}
                             <strong class="extra-price">- €{{ $extra[1] }}
                             </strong>
-                            <label id="{{ $extra[2] }}xtrname">
                             <div id="{{ $extra[2] }}xtrinfo" price="{{ $extra[1] }}" name="{{ $extra[0] }}" style="display:none;">
                           </span>
                         </button>
@@ -148,7 +164,11 @@
                       <div class="add-amount">
                         <button type="button" onclick="incrementProduct({{ $product->{'id'} }},'+');" style="background-color: rgba(0, 0, 0, 0)" href="#" class="amount-button">+</button>
                         <button type="button" onclick="incrementProduct({{ $product->{'id'} }},'-');" style="background-color: rgba(0, 0, 0, 0)" href="#" class="amount-button">-</button>
-                      </div><input id="submit" onclick="addToCart({{ $product->{'id'} }}, [@foreach($extras_identifier[$product->{'id'}] as $extra) '{{ $extra[2] }}'@if(!$loop->last),@endif @endforeach])" )" type="button" value="+ Toevoegen Aan Bestelling" data-wait="Bezig.." class="important-button add-to-cart w-button">
+                      </div>
+                      @csrf
+                      <input id="{{ $product->{'id'} }}extras" type="hidden" name="extras" value="">
+                      <input type="hidden" name="product" value="{{ $product->{'id'} }}">
+                      <input id="submit" type="submit" value="+ Toevoegen Aan Bestelling" data-wait="Bezig.." class="important-button add-to-cart w-button">
                     </div>
                   </form>
                   <div class="w-form-done">
