@@ -2,6 +2,7 @@
 <html data-wf-page="619b7419f5b32f6693d4600c" data-wf-site="619b7419f5b32f8143d4600a">
 <head>
   <meta charset="utf-8">
+  <meta name="robots" content="noindex">
   <title>Bestelling voltooien</title>
   <meta content="Bestelling voltooien" property="og:title">
   <meta content="Bestelling voltooien" property="twitter:title">

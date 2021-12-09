@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/horeka/public_html/demo
+    - /bin/cp -R * $DEPLOYPATH

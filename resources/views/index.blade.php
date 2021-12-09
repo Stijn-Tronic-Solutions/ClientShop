@@ -2,6 +2,7 @@
 <html data-wf-page="619b7419f5b32f01dcd4600b" data-wf-site="619b7419f5b32f8143d4600a">
 <head>
   <meta charset="utf-8">
+  <meta name="robots" content="noindex">
   <title>Online Bestellen {{ $shop_name }} - {{ $shop_details }}</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
