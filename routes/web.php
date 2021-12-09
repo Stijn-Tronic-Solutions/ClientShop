@@ -14,12 +14,7 @@ use App\Http\Controllers\ShopController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/afrekenen', function () {
-    return view('afrekenen.index');
-});
-Route::get('/api',[ShopController::class, 'launchMainShop']);
+Route::get('/',[ShopController::class, 'launchMainShop']);
 Route::post('/toevoegen', [ShopController::class, 'addToCart']);
 Route::post('/verwijderen', [ShopController::class, 'removeFromCart']);
+Route::get('/voltooien', [ShopController::class, 'launchCheckOut']);

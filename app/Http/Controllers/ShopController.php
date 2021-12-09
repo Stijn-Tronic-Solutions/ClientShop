@@ -88,6 +88,46 @@ class ShopController extends Controller
     ]);
     }
 
+    public function launchCheckOut(Request $request){
+
+      /*
+        -=-=-=-=- Horeka API base variables -=-=-=-=-
+      */
+
+
+      /*
+        -=-=-=-=- Horeka Systemen API Handling -=-=-=-=-
+      */
+
+      $client = new Client([
+        'base_uri' => $this->base_uri . 'shop-api/'
+      ]);
+
+      // - -Fetching shop data from Horeka API
+      $shopJson = $client->request('GET', 'api=' . $this->horeka_api_key);
+      $shopData = json_decode($shopJson->getBody());
+      $shop_name = $shopData->{'shop_name'};
+      $shop_details = $shopData->{'details'};
+      $logo_uri = $this->base_uri . 'uploads/shop/' . $shopData->{'image'};
+      $domain_name = $shopData->{'domain_name'};
+      // {{ $product_base_uri }}{{ $product->{'image'} }}
+
+
+      // -- Retreiving AJAX cart data from cookies
+      $cart = session()->get('cart');
+      if ($cart == null) $cart = [];
+
+
+
+      return view('verwerkbestelling.index', [
+      // -- main shop info
+      'shop_name' => $shop_name,
+      'logo_uri' => $logo_uri,
+      'shop_details' => $shop_details,
+      'domain_name' => $domain_name,
+      'cart' => $request->session()->get('cart')
+    ]);
+    }
 
     public function addToCart(Request $request){
       $productId = $request->input('product');

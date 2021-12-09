@@ -1964,15 +1964,10 @@ a {
 }
 
 .bestel-footer.credits {
-  display: none;
   height: auto;
   max-height: none;
   background-color: #f0f0f0;
   background-image: none;
-}
-
-.bestel-footer.credits.nothidden {
-  display: block;
 }
 
 .image {
@@ -2156,7 +2151,7 @@ a {
 .products-scroller {
   overflow: auto;
   height: 150px;
-  margin: 20px -10px 10px;
+  margin: 10px -10px;
   padding-right: 10px;
   padding-left: 10px;
 }
@@ -2534,8 +2529,8 @@ a {
   margin-top: 60px;
   grid-auto-flow: column;
   grid-row-gap: 20px;
-  -ms-grid-columns: 1.5fr 1fr 1fr 1fr;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   -ms-grid-rows: auto auto;
   grid-template-rows: auto auto;
 }
@@ -2549,7 +2544,6 @@ a {
 
 .verwerk-text {
   margin-top: 20px;
-  color: #191919;
 }
 
 .verwerk-option-link {
@@ -2580,13 +2574,9 @@ a {
   margin-top: 60px;
 }
 
-.online-order-requirements {
-  margin-top: 60px;
-}
-
 .special-input {
   border: 1px none #000;
-  background-color: #f9f5f3;
+  background-color: #0e0e0e;
   color: #eb6e00;
 }
 
@@ -2606,8 +2596,8 @@ a {
 }
 
 .details-inputs {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -3279,16 +3269,6 @@ a {
     width: 45%;
   }
 
-  .special-input.half.left {
-    display: block;
-    width: 100%;
-  }
-
-  .special-input.half.right {
-    display: block;
-    width: 100%;
-  }
-
   .text-block-2 {
     text-align: center;
     white-space: normal;
@@ -3374,17 +3354,6 @@ a {
   grid-column-end: span 2;
 }
 
-#w-node-bce4ac1b-5ed0-8320-46ed-b4d9f75ad62f-dcd4600b {
-  -ms-grid-row: span 1;
-  grid-row-start: span 1;
-  -ms-grid-row-span: 1;
-  grid-row-end: span 1;
-  -ms-grid-column: span 1;
-  grid-column-start: span 1;
-  -ms-grid-column-span: 1;
-  grid-column-end: span 1;
-}
-
 #w-node-f45ef1e5-b357-aa3a-851a-0e2e0ef120f5-0ef120f1 {
   -ms-grid-row: span 2;
   grid-row-start: span 2;
@@ -3420,10 +3389,10 @@ a {
   grid-row-start: span 1;
   -ms-grid-row-span: 1;
   grid-row-end: span 1;
-  -ms-grid-column: span 4;
-  grid-column-start: span 4;
-  -ms-grid-column-span: 4;
-  grid-column-end: span 4;
+  -ms-grid-column: span 3;
+  grid-column-start: span 3;
+  -ms-grid-column-span: 3;
+  grid-column-end: span 3;
 }
 
 #w-node-_842708ae-ea0a-cc35-46e4-ca6b8dd6d7a3-93d4600c {
@@ -3434,27 +3403,11 @@ a {
 #w-node-b3a88585-5e8a-44db-aa8a-eaf369bc0740-93d4600c {
   -ms-grid-column-align: center;
   justify-self: center;
-  -ms-grid-column-span: 2;
-  grid-column-end: 3;
-  -ms-grid-column: 1;
-  grid-column-start: 1;
-  -ms-grid-row-span: 1;
-  grid-row-end: 3;
-  -ms-grid-row: 2;
-  grid-row-start: 2;
 }
 
 #w-node-_9ce2a1ff-c40b-26ec-1df4-5799fad0585a-93d4600c {
   -ms-grid-column-align: center;
   justify-self: center;
-  -ms-grid-column-span: 2;
-  grid-column-end: 5;
-  -ms-grid-column: 3;
-  grid-column-start: 3;
-  -ms-grid-row-span: 1;
-  grid-row-end: 3;
-  -ms-grid-row: 2;
-  grid-row-start: 2;
 }
 
 #w-node-_43d22947-3a42-4bf3-b3e3-90c87468019e-4a5d6f6d {
@@ -3524,10 +3477,10 @@ a {
     grid-row-start: span 1;
     -ms-grid-row-span: 1;
     grid-row-end: span 1;
-    -ms-grid-column: span 4;
-    grid-column-start: span 4;
-    -ms-grid-column-span: 4;
-    grid-column-end: span 4;
+    -ms-grid-column: span 2;
+    grid-column-start: span 2;
+    -ms-grid-column-span: 2;
+    grid-column-end: span 2;
   }
 
   #w-node-_43d22947-3a42-4bf3-b3e3-90c87468019e-4a5d6f6d {
@@ -3585,32 +3538,10 @@ a {
     grid-row-start: span 1;
     -ms-grid-row-span: 1;
     grid-row-end: span 1;
-    -ms-grid-column: span 2;
-    grid-column-start: span 2;
-    -ms-grid-column-span: 2;
-    grid-column-end: span 2;
-  }
-
-  #w-node-b3a88585-5e8a-44db-aa8a-eaf369bc0740-93d4600c {
-    -ms-grid-column: span 2;
-    grid-column-start: span 2;
-    -ms-grid-column-span: 2;
-    grid-column-end: span 2;
-    -ms-grid-row: span 1;
-    grid-row-start: span 1;
-    -ms-grid-row-span: 1;
-    grid-row-end: span 1;
-  }
-
-  #w-node-_9ce2a1ff-c40b-26ec-1df4-5799fad0585a-93d4600c {
-    -ms-grid-column: span 2;
-    grid-column-start: span 2;
-    -ms-grid-column-span: 2;
-    grid-column-end: span 2;
-    -ms-grid-row: span 1;
-    grid-row-start: span 1;
-    -ms-grid-row-span: 1;
-    grid-row-end: span 1;
+    -ms-grid-column: span 1;
+    grid-column-start: span 1;
+    -ms-grid-column-span: 1;
+    grid-column-end: span 1;
   }
 }
 

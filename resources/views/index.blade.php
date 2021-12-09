@@ -2,7 +2,7 @@
 <html data-wf-page="619b7419f5b32f01dcd4600b" data-wf-site="619b7419f5b32f8143d4600a">
 <head>
   <meta charset="utf-8">
-  <title>Horeka Template - Aly Baba</title>
+  <title>Online Bestellen {{ $shop_name }} - {{ $shop_details }}</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/components.css" rel="stylesheet" type="text/css">
@@ -116,7 +116,7 @@
             </div>
           </div>
           <div class="finish-order-div">
-            <a href="bestelling-voltooien.html" class="important-button w-button">Bestelling Voltooien</a>
+            <a href="voltooien" class="important-button w-button">Bestelling Voltooien</a>
             <div class="of">of</div>
             <a href="#" class="annuleren">Bestelling annuleren</a>
           </div>
@@ -226,21 +226,41 @@
         <div class="order-information">
           <h3>Jouw bestelling</h3>
           <div class="products-scroller">
-            <div class="order-item">
-              <div class="w-clearfix">
-                <div class="item-name">Product Name</div>
-                <div class="item-price">€0.00</div>
+          @if ($cart != null) @foreach ($cart->uniqueProducts as $key => $cartProduct)
+              <div class="order-item">
+                <div class="w-clearfix">
+                  <div class="item-name">{{ $cartProduct['amount'] }} x {{ $cartProduct['name'] }}</div>
+                  <div class="item-price">€ {{ number_format($cartProduct['price'], 2) }}</div>
+                </div>
+                <div class="subinfo-for-order w-clearfix">
+                  <div class="item-subinfo"> {{ $cartProduct['extras'] }} </div>
+                  <form method="POST" action="verwijderen">
+                    @csrf
+                    <input type="hidden" name="uniqueId" value="{{ $key }}">
+                    <button type="submit" style="background-color: rgb(0,0,0,0);" class="remove-product">Verwijderen</button>
+                  </form>
               </div>
-              <div class="subinfo-for-order w-clearfix">
-                <div class="item-subinfo">Extra's go here</div>
-                <a href="#" class="remove-product">Verwijderen</a>
               </div>
-            </div>
+          @endforeach @endif
           </div>
           <a data-w-id="f78929d1-2998-28f2-b4ac-02e90d97b74c" href="#" class="close-order-block">x</a>
+          <div class="order-item total">
+            <div class="subinfo-for-order w-clearfix">
+              <div class="item-subinfo">Subtotaal</div>
+              <a href="#" class="remove-product" id="sub-price">@if ($cart != null) @if ($cart->subPrice > 0) € {{ number_format($cart->subPrice, 2) }} @else --- @endif @else --- @endif </a>
+            </div>
+            <div class="subinfo-for-order w-clearfix">
+              <div class="item-subinfo">Bezorgkosten</div>
+              <a href="#" class="remove-product">€2.00</a>
+            </div>
+            <div class="total w-clearfix">
+              <div class="item-name">Totaal</div>
+              <div id="total-price" class="item-price">@if ($cart != null) @if ($cart->totalPrice > 2) € {{ number_format($cart->totalPrice, 2) }} @else --- @endif @else --- @endif </div>
+            </div>
+          </div>
         </div>
         <div class="finish-order-div">
-          <a href="bestelling-voltooien.html" class="important-button w-button">Bestelling Voltooien</a>
+          <a href="voltooien" class="important-button w-button">Bestelling Voltooien</a>
           <div class="of">of</div>
           <a href="#" class="annuleren">Bestelling annuleren</a>
         </div>
